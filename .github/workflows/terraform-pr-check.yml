@@ -28,6 +28,7 @@ jobs:
         run: |
           echo ${TF_PLUGIN_CACHE_DIR}
           mkdir -p ${TF_PLUGIN_CACHE_DIR}
+          mkdir ~/.terraform.d
           ls -la ~/.terraform.d
 
       - name: Plan
