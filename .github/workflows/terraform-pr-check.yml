@@ -9,6 +9,7 @@ on:
 
 env:
   TERRAGRUNT_TFPATH: terraform
+  TF_PLUGIN_CACHE_DIR: "$HOME/.terraform.d/plugin-cache"
 
 jobs:
   run:
@@ -22,6 +23,11 @@ jobs:
         uses: aquaproj/aqua-installer@v2.2.0
         with:
           aqua_version: v2.16.4
+
+      - name: Plan
+        run: |
+          echo ${TF_PLUGIN_CACHE_DIR}
+          mkdir -p ${TF_PLUGIN_CACHE_DIR}
 
       - name: Plan
         run: |
