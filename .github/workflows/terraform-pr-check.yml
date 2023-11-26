@@ -26,7 +26,8 @@ jobs:
       - name: Plan
         run: |
           cd accounts
-          terragrunt run-all plan --terragrunt-log-level debug
+          terragrunt run-all init
+          terragrunt run-all plan
 
       - name: Test
         run: |
