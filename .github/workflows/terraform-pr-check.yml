@@ -28,6 +28,7 @@ jobs:
         run: |
           echo ${TF_PLUGIN_CACHE_DIR}
           mkdir -p ${TF_PLUGIN_CACHE_DIR}
+          ls -la ~/.terraform.d
 
       - name: Plan
         run: |
@@ -37,4 +38,5 @@ jobs:
       - name: Test
         run: |
           echo 'test'
+          ls -la ~/.terraform.d
           terragrunt --version
