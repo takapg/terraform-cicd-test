@@ -30,7 +30,7 @@ jobs:
 
       - name: Plan
         run: |
-          ls -la /.terraform.d
+          ls -la $TF_PLUGIN_CACHE_DIR
           cd accounts
           terragrunt run-all plan
 
