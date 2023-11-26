@@ -9,7 +9,6 @@ on:
 
 env:
   TERRAGRUNT_TFPATH: terraform
-  TERRAGRUNT_DISABLE_COMMAND_VALIDATION: true
 
 jobs:
   run:
