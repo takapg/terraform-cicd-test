@@ -37,3 +37,4 @@ jobs:
       - name: Test
         run: |
           echo 'test'
+          cat development/envs/development/env_unique/load_balancer/.terraform.lock.hcl
