@@ -6,6 +6,6 @@ locals {
 remote_state {
   backend = "local"
 
-  config {
+  config = {
   }
 }
