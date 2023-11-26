@@ -1,0 +1,20 @@
+name: Terraform PR check
+
+on:
+  workflow_dispatch:
+  # pull_request:
+  #   types: [synchronize, opened, ready_for_review]
+  #   branches:
+  #     - main
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Test
+        run: |
+          echo 'test'
