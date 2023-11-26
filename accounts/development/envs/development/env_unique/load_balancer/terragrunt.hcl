@@ -5,4 +5,6 @@ include "root" {
 
 dependency "network" {
   config_path = "../network"
+
+  skip_outputs = true
 }
