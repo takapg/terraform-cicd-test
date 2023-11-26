@@ -9,7 +9,7 @@ on:
 
 env:
   TERRAGRUNT_TFPATH: terraform
-  TF_PLUGIN_CACHE_DIR: ~/.terraform.d/plugin-cache
+  TF_PLUGIN_CACHE_DIR: ${{ github.workspace }}/.terraform.d/plugin-cache
 
 jobs:
   run:
@@ -26,7 +26,7 @@ jobs:
 
       - name: Setup
         run: |
-          mkdir -p ~/.terraform.d/plugin-cache
+          mkdir --parents $TF_PLUGIN_CACHE_DIR
 
       - name: Plan
         run: |
@@ -37,5 +37,3 @@ jobs:
       - name: Test
         run: |
           echo 'test'
-          ls -la ~/.terraform.d
-          terragrunt --version
