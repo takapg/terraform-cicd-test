@@ -12,4 +12,4 @@ registries:
   ref: v3.140.0 # renovate: depName=aquaproj/aqua-registry
 packages:
 - name: tfutils/tfenv@v3.0.0
-- name: gruntwork-io/terragrunt@v0.44.4
+- name: gruntwork-io/terragrunt@v0.53.6
