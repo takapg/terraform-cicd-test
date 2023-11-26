@@ -9,7 +9,7 @@ on:
 
 env:
   TERRAGRUNT_TFPATH: terraform
-  TF_PLUGIN_CACHE_DIR: "$HOME/.terraform.d/plugin-cache"
+  TF_PLUGIN_CACHE_DIR: ~/.terraform.d/plugin-cache
 
 jobs:
   run:
@@ -24,7 +24,7 @@ jobs:
         with:
           aqua_version: v2.16.4
 
-      - name: Plan
+      - name: Setup
         run: |
           echo ${TF_PLUGIN_CACHE_DIR}
           mkdir -p ${TF_PLUGIN_CACHE_DIR}
