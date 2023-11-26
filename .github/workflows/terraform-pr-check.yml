@@ -15,6 +15,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Install aqua
+        uses: aquaproj/aqua-installer@v2.2.0
+        with:
+          aqua_version: v2.16.4
+
       - name: Test
         run: |
           echo 'test'
+          terragrunt --version
