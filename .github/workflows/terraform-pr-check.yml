@@ -20,6 +20,11 @@ jobs:
         with:
           aqua_version: v2.16.4
 
+      - name: Plan
+        run: |
+          cd accounts
+          terragrunt run-all plan
+
       - name: Test
         run: |
           echo 'test'
