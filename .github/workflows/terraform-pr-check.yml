@@ -32,7 +32,7 @@ jobs:
         run: |
           ls -la $TF_PLUGIN_CACHE_DIR
           cd accounts
-          terragrunt run-all init
+          terragrunt run-all init --terragrunt-parallelism 1
           terragrunt run-all plan
 
       - name: Test
