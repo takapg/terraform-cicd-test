@@ -27,7 +27,7 @@ jobs:
       - name: Setup
         run: |
           echo ${TF_PLUGIN_CACHE_DIR}
-          mkdir -p "${TF_PLUGIN_CACHE_DIR}"
+          mkdir -p ~/.terraform.d/plugin-cache
           # mkdir ~/.terraform.d
           ls -la ~/.terraform.d
 
