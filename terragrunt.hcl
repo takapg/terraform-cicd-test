@@ -1,0 +1,8 @@
+locals {
+  product  = "tct" # terraform-cicd-test
+  env_vars = read_terragrunt_config(find_in_parent_folders("env.hcl"))
+}
+
+remote_state {
+  backend = "local"
+}
