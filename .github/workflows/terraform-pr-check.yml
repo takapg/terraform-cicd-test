@@ -24,9 +24,9 @@ jobs:
         with:
           aqua_version: v2.16.4
 
-      - name: Setup
+      - name: Create Terraform plugin cache dir
         run: |
-          mkdir --parents $TF_PLUGIN_CACHE_DIR
+          mkdir -p $TF_PLUGIN_CACHE_DIR
 
       - name: Plan
         run: |
