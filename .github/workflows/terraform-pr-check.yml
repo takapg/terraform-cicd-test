@@ -27,6 +27,7 @@ jobs:
         uses: aquaproj/aqua-installer@v2.2.0
         with:
           aqua_version: v2.16.4
+          aqua_opts: ""
 
       - name: Config Terraform plugin cache
         run: |
@@ -77,6 +78,7 @@ jobs:
         uses: aquaproj/aqua-installer@v2.2.0
         with:
           aqua_version: v2.16.4
+          aqua_opts: ""
 
       - name: Config Terraform plugin cache
         run: |
