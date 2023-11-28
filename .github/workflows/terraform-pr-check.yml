@@ -42,9 +42,13 @@ jobs:
             ${{ runner.os }}-terraform-
 
       - name: Init
-        run: |
-          cd accounts
-          terragrunt run-all init
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 10
+          max_attempts: 3
+          command: |
+            cd accounts
+            terragrunt run-all init
 
       - name: Run pre-commit
         uses: pre-commit/action@v3.0.0
