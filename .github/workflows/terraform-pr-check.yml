@@ -12,7 +12,7 @@ env:
   TF_PLUGIN_CACHE_DIR: ${{ github.workspace }}/.terraform.d/plugin-cache
 
 jobs:
-  run:
+  pre-commit:
     runs-on: ubuntu-latest
 
     steps:
@@ -32,6 +32,33 @@ jobs:
         uses: pre-commit/action@v3.0.0
         with:
           extra_args: --all-files
+
+      - name: Auto commit
+        if: always()
+        uses: EndBug/add-and-commit@v9
+        with:
+          author_name: "github-actions[bot]"
+          author_email: "github-actions[bot]@users.noreply.github.com"
+          committer_name: "github-actions[bot]"
+          committer_email: "github-actions[bot]@users.noreply.github.com"
+          message: "chore: terraform fmt"
+
+  plan:
+    needs: [pre-commit]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install aqua
+        uses: aquaproj/aqua-installer@v2.2.0
+        with:
+          aqua_version: v2.16.4
+
+      - name: Create Terraform plugin cache dir
+        run: |
+          mkdir -p $TF_PLUGIN_CACHE_DIR
 
       - name: Plan
         run: |
