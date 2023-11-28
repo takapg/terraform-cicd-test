@@ -28,9 +28,18 @@ jobs:
         with:
           aqua_version: v2.16.4
 
-      - name: Create Terraform plugin cache dir
+      - name: Config Terraform plugin cache
         run: |
-          mkdir -p $TF_PLUGIN_CACHE_DIR
+          echo 'plugin_cache_dir="$HOME/.terraform.d/plugin-cache"' >~/.terraformrc
+          mkdir --parents ~/.terraform.d/plugin-cache
+
+      - name: Cache Terraform Plugins
+        uses: actions/cache@v3
+        with:
+          path: ~/.terraform.d/plugin-cache
+          key: ${{ runner.os }}-terraform-${{ hashFiles('**/.terraform.lock.hcl') }}
+          restore-keys: |
+            ${{ runner.os }}-terraform-
 
       - name: Init
         run: |
@@ -65,14 +74,22 @@ jobs:
         with:
           aqua_version: v2.16.4
 
-      - name: Create Terraform plugin cache dir
+      - name: Config Terraform plugin cache
         run: |
-          mkdir -p $TF_PLUGIN_CACHE_DIR
+          echo 'plugin_cache_dir="$HOME/.terraform.d/plugin-cache"' >~/.terraformrc
+          mkdir --parents ~/.terraform.d/plugin-cache
+
+      - name: Cache Terraform Plugins
+        uses: actions/cache@v3
+        with:
+          path: ~/.terraform.d/plugin-cache
+          key: ${{ runner.os }}-terraform-${{ hashFiles('**/.terraform.lock.hcl') }}
+          restore-keys: |
+            ${{ runner.os }}-terraform-
 
       - name: Plan
         run: |
           cd accounts
-          terragrunt run-all init --terragrunt-parallelism 1
           terragrunt run-all plan
 
       - name: Test
