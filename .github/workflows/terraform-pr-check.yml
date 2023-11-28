@@ -9,7 +9,6 @@ on:
 
 env:
   TERRAGRUNT_TFPATH: terraform
-  TF_PLUGIN_CACHE_DIR: ${{ github.workspace }}/.terraform.d/plugin-cache
 
 permissions:
   contents: write
