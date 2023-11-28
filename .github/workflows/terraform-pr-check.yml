@@ -45,7 +45,7 @@ jobs:
           author_email: "github-actions[bot]@users.noreply.github.com"
           committer_name: "github-actions[bot]"
           committer_email: "github-actions[bot]@users.noreply.github.com"
-          message: "chore: terraform fmt"
+          message: "chore: pre-commit"
 
   plan:
     needs: [pre-commit]
