@@ -1,6 +1,9 @@
 # General
 .DS_Store
 
+# Terraform plugin cache
+.terraform.d
+
 # Local .terraform directories
 .terraform
 
