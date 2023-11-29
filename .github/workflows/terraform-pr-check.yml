@@ -22,32 +22,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Cache aqua tools
-        uses: actions/cache@v3
-        with:
-          path: ~/.local/share/aquaproj-aqua
-          key: ${{ runner.os }}-aqua-${{ hashFiles('aqua.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-aqua-
-
-      - name: Install aqua
-        uses: aquaproj/aqua-installer@v2.2.0
-        with:
-          aqua_version: v2.16.4
-          aqua_opts: ""
-
-      - name: Config Terraform plugin cache
-        run: |
-          echo 'plugin_cache_dir="$HOME/.terraform.d/plugin-cache"' >~/.terraformrc
-          mkdir --parents ~/.terraform.d/plugin-cache
-
-      - name: Cache Terraform Plugins
-        uses: actions/cache@v3
-        with:
-          path: ~/.terraform.d/plugin-cache
-          key: ${{ runner.os }}-terraform-${{ hashFiles('**/.terraform.lock.hcl') }}
-          restore-keys: |
-            ${{ runner.os }}-terraform-
+      - name: Setup
+        uses: ./.github/actions/setup
 
       - name: Init
         uses: nick-fields/retry@v2
