@@ -4,5 +4,5 @@ include "root" {
 }
 
 dependencies {
-  paths =   ["../network"]
+  paths = ["../network"]
 }
