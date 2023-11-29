@@ -74,7 +74,7 @@ jobs:
           message: "chore: pre-commit"
 
   plan:
-    needs: [pre-commit]
+    needs: [check-code]
     runs-on: ubuntu-latest
 
     steps:
