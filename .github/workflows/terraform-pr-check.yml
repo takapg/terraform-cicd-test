@@ -15,7 +15,7 @@ permissions:
   pull-requests: write
 
 jobs:
-  pre-commit:
+  check-code:
     runs-on: ubuntu-latest
 
     steps:
