@@ -44,7 +44,7 @@ jobs:
 
       - name: Generate .terraform-version
         run: |
-          find accounts -name .terraform-version |
+          find accounts -name version.tf |
           xargs -I{} hcledit --file {} attribute get terraform.required_version
 
       - name: Auto commit
