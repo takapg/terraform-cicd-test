@@ -42,7 +42,7 @@ jobs:
           generate_terraform_version() {
             working_dir=$1
             hcledit --file ${working_dir} attribute get terraform.required_version |
-            tr -d '"' > ${working_dir}/.terraform-version
+            tr -d '"' > $(dirname ${working_dir})/.terraform-version
           }
           export -f generate_terraform_version
 
