@@ -19,5 +19,5 @@ remote_state {
 generate "version" {
   path      = "version.tf"
   if_exists = "overwrite_terragrunt"
-  contents  = file("./files/version.tf")
+  contents  = file("./files/terraform/version.tf")
 }
