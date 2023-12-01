@@ -34,7 +34,7 @@ jobs:
             cd files/terraform
             tfenv use min-required
 
-            cd ~/accounts
+            cd ${{ github.workspace }}/accounts
             terragrunt run-all init
 
       - name: Run pre-commit
