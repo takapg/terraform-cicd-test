@@ -19,5 +19,5 @@ remote_state {
 generate "version" {
   path      = "version.tf"
   if_exists = "overwrite_terragrunt"
-  contents  = file("${path_relative_from_include()}/files/version.tf")
+  contents  = file("./files/version.tf")
 }
