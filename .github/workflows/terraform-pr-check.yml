@@ -39,9 +39,14 @@ jobs:
 
       - name: Generate .terraform-version
         run: |
+          generate_terraform_version() {
+            working_dir=$1
+            hcledit --file ${working_dir} attribute get terraform.required_version |
+            tr -d '"' > ${working_dir}/.terraform-version
+          }
+
           find accounts -name version.tf |
-          xargs -I{} hcledit --file {} attribute get terraform.required_version |
-          tr -d '"'
+          xargs generate_terraform_version -I{} 
 
       - name: Run pre-commit
         uses: pre-commit/action@v3.0.0
