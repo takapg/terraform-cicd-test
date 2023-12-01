@@ -31,7 +31,10 @@ jobs:
           timeout_minutes: 10
           max_attempts: 3
           command: |
-            cd accounts
+            cd files/terraform
+            tfenv use min-required
+
+            cd ~/accounts
             terragrunt run-all init
 
       - name: Run pre-commit
