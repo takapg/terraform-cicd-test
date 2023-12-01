@@ -41,7 +41,7 @@ jobs:
         run: |
           find accounts -name version.tf |
           xargs -I{} hcledit --file {} attribute get terraform.required_version |
-          tr '"' ''
+          tr -d '"'
 
       - name: Run pre-commit
         uses: pre-commit/action@v3.0.0
