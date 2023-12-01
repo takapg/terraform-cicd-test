@@ -49,6 +49,13 @@ jobs:
           find accounts -name version.tf |
           xargs -I{} bash -c 'generate_terraform_version {}'
 
+      - name: Generate .terraform.lock.hcl
+        run: |
+          tfupdate lock \
+            --platform=linux_amd64 --platform=linux_amd64 --platform=darwin_amd64 --platform=darwin_arm64 \
+            --recursive \
+            accounts
+
       - name: Run pre-commit
         uses: pre-commit/action@v3.0.0
         with:
