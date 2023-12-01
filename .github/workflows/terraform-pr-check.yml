@@ -44,9 +44,10 @@ jobs:
             hcledit --file ${working_dir} attribute get terraform.required_version |
             tr -d '"' > ${working_dir}/.terraform-version
           }
+          export -f generate_terraform_version
 
           find accounts -name version.tf |
-          xargs generate_terraform_version -I{} 
+          xargs -I{} bash -c 'generate_terraform_version {}'
 
       - name: Run pre-commit
         uses: pre-commit/action@v3.0.0
