@@ -55,6 +55,7 @@ jobs:
           extra_args: --all-files
 
       - name: Auto commit
+        id: auto-commit
         if: always()
         uses: EndBug/add-and-commit@v9
         with:
@@ -63,6 +64,12 @@ jobs:
           committer_name: "github-actions[bot]"
           committer_email: "github-actions[bot]@users.noreply.github.com"
           message: "chore: ${{ github.workflow }} (${{ github.job }})"
+
+      - name: Check git diff
+        run: |
+          if [ "${{ steps.auto-commit.outputs.committed }}" == "true" ]; then
+            exit 1
+          fi
 
   plan:
     needs: [check-code]
