@@ -65,7 +65,7 @@ jobs:
           committer_email: "github-actions[bot]@users.noreply.github.com"
           message: "chore: ${{ github.workflow }} (${{ github.job }})"
 
-      - name: Check git diff
+      - name: Cancel workflow
         run: |
           if [ "${{ steps.auto-commit.outputs.committed }}" == "true" ]; then
             exit 1
