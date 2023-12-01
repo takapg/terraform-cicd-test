@@ -42,6 +42,11 @@ jobs:
         with:
           extra_args: --all-files
 
+      - name: Generate .terraform-version
+        run: |
+          find -path accounts -name .terraform-version |
+          sort
+
       - name: Auto commit
         if: always()
         uses: EndBug/add-and-commit@v9
