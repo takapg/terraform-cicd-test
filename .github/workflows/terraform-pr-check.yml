@@ -44,7 +44,7 @@ jobs:
 
       - name: Generate .terraform-version
         run: |
-          find -path accounts -name .terraform-version |
+          find accounts -name .terraform-version |
           sort
 
       - name: Auto commit
