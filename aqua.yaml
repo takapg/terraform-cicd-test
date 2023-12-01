@@ -13,3 +13,4 @@ registries:
 packages:
 - name: tfutils/tfenv@v3.0.0
 - name: gruntwork-io/terragrunt@v0.51.9
+- name: minamijoyo/hcledit@v0.2.6
