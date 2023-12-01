@@ -52,7 +52,7 @@ jobs:
       - name: Generate .terraform.lock.hcl
         run: |
           tfupdate lock \
-            --platform=linux_amd64 --platform=linux_amd64 --platform=darwin_amd64 --platform=darwin_arm64 \
+            --platform=linux_amd64 --platform=linux_arm64 --platform=darwin_amd64 --platform=darwin_arm64 \
             --recursive \
             accounts
 
