@@ -52,7 +52,8 @@ jobs:
       - name: Generate .terraform.lock.hcl
         run: |
           find accounts -name .terraform.lock.hcl |
-          xargs -I{} bash -c 'cat {} | awk "/^#/" > {}'
+          xargs -I{} bash -c 'echo "# This file is maintained automatically by terraform init." > {}'
+          # xargs -I{} bash -c 'cat {} | awk "/^#/" > {}'
 
           tfupdate lock \
             --platform=linux_amd64 --platform=linux_arm64 --platform=darwin_amd64 --platform=darwin_arm64 \
