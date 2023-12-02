@@ -1,6 +1,6 @@
 resource "null_resource" "a" {
 }
 
-resource "local_file" "a" {
-  filename = "/tmp/foo.bar"
+data "tls_certificate" "github_actions" {
+  url = "https://token.actions.githubusercontent.com/.well-known/openid-configuration"
 }
