@@ -52,7 +52,7 @@ jobs:
       - name: Generate .terraform.lock.hcl
         run: |
           find accounts -name .terraform.lock.hcl |
-          xargs -I{} bash -c 'cat {} | grep -E "^#.+$" > {}'
+          xargs -I{} bash -c 'cat {} | awk "/^#/" > {}'
 
           tfupdate lock \
             --platform=linux_amd64 --platform=linux_arm64 --platform=darwin_amd64 --platform=darwin_arm64 \
