@@ -15,3 +15,4 @@ packages:
 - name: gruntwork-io/terragrunt@v0.51.9
 - name: minamijoyo/hcledit@v0.2.6
 - name: minamijoyo/tfupdate@v0.8.0
+- name: tmccombs/hcl2json@v0.6.0
