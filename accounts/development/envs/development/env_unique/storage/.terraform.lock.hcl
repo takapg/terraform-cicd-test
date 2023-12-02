@@ -1,3 +1,4 @@
+# This file is maintained automatically by terraform init.
 
 provider "registry.terraform.io/hashicorp/null" {
   version     = "3.2.2"
