@@ -5,8 +5,14 @@
       "required_providers": [
         {
           "null": {
-            "source": "hashicorp/null",
+            "source": "registry.terraform.io/hashicorp/null",
             "version": "3.2.2"
+          }
+        },
+        {
+          "tls": {
+            "source": "registry.terraform.io/hashicorp/tls",
+            "version": "4.0.5"
           }
         }
       ]
