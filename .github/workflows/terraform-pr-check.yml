@@ -41,17 +41,8 @@ jobs:
         run: |
           chmod +x scripts/*
           ./scripts/generate_terraform_version.sh
-
-      - name: Generate .terraform.lock.hcl
-        run: |
-          echo 'todo'
-          # find accounts -name .terraform.lock.hcl |
-          # xargs -I{} awk -i inplace '/^#/' {}
-
-          tfupdate lock \
-            --platform=linux_amd64 --platform=linux_arm64 --platform=darwin_amd64 --platform=darwin_arm64 \
-            --recursive \
-            accounts
+          ./scripts/update_version_json.sh
+          ./scripts/update_terraform_lock_hcl.sh
 
       - name: Run pre-commit
         uses: pre-commit/action@v3.0.0
