@@ -37,8 +37,9 @@ jobs:
             cd ${{ github.workspace }}/accounts
             terragrunt run-all init
 
-      - name: Generate .terraform-version
+      - name: Generate files
         run: |
+          chmod +x scripts
           ./scripts/generate_terraform_version.sh
 
       - name: Generate .terraform.lock.hcl
