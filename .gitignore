@@ -30,4 +30,3 @@ crash.*.log
 backend.tf
 provider.tf
 version.tf
-version.json
