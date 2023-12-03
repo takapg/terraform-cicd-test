@@ -17,7 +17,7 @@ remote_state {
 }
 
 generate "version" {
-  path      = "version.tf"
+  path      = "version.json"
   if_exists = "overwrite_terragrunt"
-  contents  = file("./files/terraform/version.tf")
+  contents  = file("./files/terraform/version.json")
 }
