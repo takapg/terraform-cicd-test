@@ -39,7 +39,7 @@ jobs:
 
       - name: Generate files
         run: |
-          chmod +x scripts
+          chmod +x scripts/*
           ./scripts/generate_terraform_version.sh
 
       - name: Generate .terraform.lock.hcl
