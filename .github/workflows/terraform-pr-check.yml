@@ -37,12 +37,12 @@ jobs:
             cd ${{ github.workspace }}/accounts
             terragrunt run-all init
 
-      - name: Generate files
+      - name: Run scripts
         run: |
           chmod +x scripts/*
-          ./scripts/generate_terraform_version.sh
-          ./scripts/update_version_json.sh
-          ./scripts/update_terraform_lock_hcl.sh
+          ./scripts/generate_terraform_version_files.sh
+          ./scripts/add_required_providers_to_version_file.sh
+          ./scripts/update_dependency_lock_files.sh
 
       - name: Run pre-commit
         uses: pre-commit/action@v3.0.0
