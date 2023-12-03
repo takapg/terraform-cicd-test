@@ -16,7 +16,7 @@ REQUIRED_PROVIDERS=$(
     .[] |
     {
       name: (.key | capture("^.+/(?<name>.+)$") | .name),
-      source: .key,
+      source: (.key | capture("^registry\\.terraform\\.io/(?<source>.+)$") | .source),
       version: .value[0].version
     }
   ' |
