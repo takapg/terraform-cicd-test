@@ -87,14 +87,11 @@ jobs:
       - name: Setup
         uses: ./.github/actions/setup
 
-      - name: Plan
-        run: |
-          cd accounts
-          $(git rev-parse --show-toplevel)/scripts/output_plan_results.sh
-
-      - name: Comment
+      - name: Plan and comment
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          github-comment exec -k default -- cat actuons/plan_results.md
+          cd accounts
+          $(git rev-parse --show-toplevel)/scripts/output_plan_results.sh
+          github-comment exec -k default -- cat plan_results.md
           github-comment hide
