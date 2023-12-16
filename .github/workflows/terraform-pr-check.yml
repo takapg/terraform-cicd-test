@@ -90,7 +90,7 @@ jobs:
       - name: Plan
         run: |
           cd accounts
-          terragrunt run-all plan
+          $(git rev-parse --show-toplevel)/scripts/output_plan_results.sh
 
       - name: Test
         run: |
