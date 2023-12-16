@@ -35,7 +35,7 @@ terragrunt run-all plan --terragrunt-tfpath $(git rev-parse --show-toplevel)/scr
 
 for tmp_tf_log_file_path in $(find . -name ${tmp_tf_log_file_name} | sort); do
   root_module_dir=$(dirname ${tmp_tf_log_file_path})
-  root_module_dir_to_git_repo_root="$(git rev-parse --show-toplevel)$(echo ${root_module_dir} | sed 's/.\///')"
+  root_module_dir_to_git_repo_root="$(git rev-parse --show-toplevel)/$(echo ${root_module_dir} | sed 's/.\///')"
   tmp_tfcmt_result_file_path="${root_module_dir}/${tmp_tfcmt_result_file_name}"
 
   echo ''
@@ -62,7 +62,7 @@ for tmp_tf_log_file_path in $(find . -name ${tmp_tf_log_file_name} | sort); do
   fi
 done
 
-plan_results=$(cat << EOF
+plan_results="
 ### Diff results
 
 <table>
@@ -80,8 +80,7 @@ plan_results=$(cat << EOF
     ${no_diff_results}
   </table>
 </details>
-EOF
-)
+"
 
 ci_link=$(echo "${plan_results}" | grep -E "${ci_link_regex_pattern}" | uniq)
 plan_results_without_ci_link=$(echo "${plan_results}" | grep -v -E "${ci_link_regex_pattern}")
