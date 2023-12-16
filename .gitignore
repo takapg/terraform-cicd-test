@@ -30,3 +30,6 @@ crash.*.log
 backend.tf
 provider.tf
 version.tf
+
+# Generated files by scripts
+plan_results.md
