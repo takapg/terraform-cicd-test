@@ -31,3 +31,15 @@ rm_tmp_files() {
 rm_tmp_files
 
 terragrunt run-all plan --terragrunt-tfpath $(git rev-parse --show-toplevel)/scripts/terraform_with_output_log_file.sh
+
+for tmp_tf_log_file_path in $(find . -name ${tmp_tf_log_file_name} | sort); do
+  root_module_dir=$(dirname ${tmp_tf_log_file_path})
+  root_module_dir_to_git_repo_root="$(git rev-parse --show-toplevel)$(echo ${root_module_dir} | sed 's/.\///')"
+  tmp_tfcmt_result_file_path="${root_module_dir}/${tmp_tfcmt_result_file_name}"
+
+  echo ''
+  echo ''
+  echo '###'
+  echo "# ${root_module_dir_to_git_repo_root}"
+  echo '###'
+done
