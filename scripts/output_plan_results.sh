@@ -52,7 +52,7 @@ for tmp_tf_log_file_path in $(find . -name ${tmp_tf_log_file_name} | sort); do
   </tr>
   "
 
-  plan_actions_text=$(cat ${tmp_tfcmt_result_file_path} grep -E "${plan_actions_regex_pattern}" || echo '')
+  plan_actions_text=$(cat ${tmp_tfcmt_result_file_path} | grep -E "${plan_actions_regex_pattern}" || echo '')
 
   if [ "${plan_actions_text}" != '' ]; then
     diff_results+="${result}"
