@@ -91,7 +91,8 @@ jobs:
         run: |
           cd accounts
           $(git rev-parse --show-toplevel)/scripts/output_plan_results.sh
-          github-comment exec --dry-run -- cat plan_results.md
+          # github-comment exec -- cat plan_results.md
+          github-comment exec -k default -- echo 'aaa'
 
       - name: Test
         run: |
