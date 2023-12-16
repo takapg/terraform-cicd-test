@@ -19,11 +19,11 @@ result_header='
 '
 
 rm_tmp_files() {
-  for tmp_tf_log_file_path in $(find . ${tmp_tf_log_file_name} | sort); do
+  for tmp_tf_log_file_path in $(find . -name ${tmp_tf_log_file_name} | sort); do
     rm -v ${tmp_tf_log_file_path}
   done
 
-  for tmp_tfcmt_result_file_path in $(find . ${tmp_tfcmt_result_file_name} | sort); do
+  for tmp_tfcmt_result_file_path in $(find . -name ${tmp_tfcmt_result_file_name} | sort); do
     rm -v ${tmp_tfcmt_result_file_path}
   done
 }
