@@ -42,4 +42,43 @@ for tmp_tf_log_file_path in $(find . -name ${tmp_tf_log_file_name} | sort); do
   echo '###'
   echo "# ${root_module_dir_to_git_repo_root}"
   echo '###'
+
+  tfcmt --output ${tmp_tfcmt_result_file_path} plan -- cat ${tmp_tf_log_file_path}
+
+  result="
+  <tr>
+    <td>${root_module_dir_to_git_repo_root}</td>
+    <td>$(cat ${tmp_tfcmt_result_file_path} | sed 's/## Plan Result//')</td>
+  </tr>
+  "
+
+  plan_actions_text=$(cat ${tmp_tfcmt_result_file_path} grep -E "${plan_actions_regex_pattern}" || echo '')
+
+  if [ "${plan_actions_text}" != '' ]; then
+    diff_results+="${result}"
+  else
+    no_diff_results+="${result}"
+  fi
 done
+
+cat << EOF > ${plan_results_file_name}
+### Diff results
+
+<table>
+  ${result_header}
+  ${diff_results}
+</table>
+
+---
+
+### No diff results
+
+<details><summary>(Click me)</summary>
+  <table>
+    ${result_header}
+    ${no_diff_results}
+  </table>
+</details>
+EOF
+
+rm_tmp_files
