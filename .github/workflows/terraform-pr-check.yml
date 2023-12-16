@@ -92,7 +92,7 @@ jobs:
           cd accounts
           $(git rev-parse --show-toplevel)/scripts/output_plan_results.sh
           # github-comment exec -- cat plan_results.md
-          github-comment exec -k default -- echo 'aaa'
+          github-comment exec --token ${{ secrets.GITHUB_TOKEN }} -k default -- echo 'aaa'
 
       - name: Test
         run: |
