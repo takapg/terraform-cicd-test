@@ -7,6 +7,7 @@ tmp_tfcmt_result_file_name='tmp_tfcmt_result.md'
 plan_results_file_name='plan_results.md'
 
 plan_actions_regex_pattern='^Plan: [0-9]+ to add,.+to destroy\.$'
+ci_link_regex_pattern='^\[CI link\].+$'
 
 diff_results=''
 no_diff_results=''
@@ -61,7 +62,7 @@ for tmp_tf_log_file_path in $(find . -name ${tmp_tf_log_file_name} | sort); do
   fi
 done
 
-cat << EOF > ${plan_results_file_name}
+plan_results=$(cat << EOF
 ### Diff results
 
 <table>
@@ -79,6 +80,16 @@ cat << EOF > ${plan_results_file_name}
     ${no_diff_results}
   </table>
 </details>
+EOF
+)
+
+ci_link=$(echo "${plan_results}" | grep -E "${ci_link_regex_pattern}" | uniq)
+plan_results_without_ci_link=$(echo "${plan_results}" | grep -v -E "${ci_link_regex_pattern}")
+
+cat << EOF > ${plan_results_file_name}
+${ci_link}
+
+${plan_results_without_ci_link}
 EOF
 
 rm_tmp_files
