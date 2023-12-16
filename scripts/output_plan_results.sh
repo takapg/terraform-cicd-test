@@ -38,6 +38,8 @@ for tmp_tf_log_file_path in $(find . -name ${tmp_tf_log_file_name} | sort); do
   root_module_dir_to_git_repo_root="$(git rev-parse --show-toplevel)/$(echo ${root_module_dir} | sed 's/.\///')"
   tmp_tfcmt_result_file_path="${root_module_dir}/${tmp_tfcmt_result_file_name}"
 
+  echo "root_module_dir: ${root_module_dir}"
+  echo "git rev-parse --show-toplevel: $(git rev-parse --show-toplevel)"
   echo ''
   echo ''
   echo '###'
