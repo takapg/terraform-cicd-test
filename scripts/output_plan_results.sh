@@ -31,7 +31,7 @@ rm_tmp_files() {
 
 rm_tmp_files
 
-terragrunt run-all plan --terragrunt-tfpath $(git rev-parse --show-toplevel)/scripts/terraform_with_output_log_file.sh
+TERRAGRUNT_TFPATH=$(git rev-parse --show-toplevel)/scripts/terraform_with_output_log_file.sh terragrunt run-all plan
 
 for tmp_tf_log_file_path in $(find . -name ${tmp_tf_log_file_name} | sort); do
   root_module_dir=$(dirname ${tmp_tf_log_file_path})
