@@ -27,7 +27,7 @@ jobs:
           private-key: ${{ secrets.PRIVATE_KEY }}
 
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.ref }}
           token: ${{ steps.app-token.outputs.token }}
@@ -82,7 +82,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup
         uses: ./.github/actions/setup
