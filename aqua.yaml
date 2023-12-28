@@ -13,7 +13,7 @@ registries:
 packages:
 - name: tfutils/tfenv@v3.0.0
 - name: gruntwork-io/terragrunt@v0.51.9
-- name: minamijoyo/hcledit@v0.2.6
+- name: minamijoyo/hcledit@v0.2.10
 - name: minamijoyo/tfupdate@v0.8.0
 - name: tmccombs/hcl2json@v0.6.0
 - name: suzuki-shunsuke/tfcmt@v4.7.2
