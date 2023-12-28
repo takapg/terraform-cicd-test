@@ -1,5 +1,6 @@
 {
   "extends": [
     "github>aquaproj/aqua-renovate-config#1.2.6"
-  ]
+  ],
+  "dependencyDashboard": false
 }
