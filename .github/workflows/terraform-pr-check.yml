@@ -29,6 +29,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
+          repository: takapg/terraform-cicd-test-assets
+          path: /tmp/terraform-cicd-test-assets/
+          token: ${{ steps.app-token.outputs.token }}
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
           ref: ${{ github.event.pull_request.head.ref }}
           token: ${{ steps.app-token.outputs.token }}
 
@@ -36,7 +43,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
         run: |
-          git clone --depth 1 https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/takapg/terraform-cicd-test-assets.git /tmp/terraform-cicd-test-assets/
+          # git clone --depth 1 https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/takapg/terraform-cicd-test-assets.git /tmp/terraform-cicd-test-assets/
           ls -la /tmp/
 
       - name: Setup
