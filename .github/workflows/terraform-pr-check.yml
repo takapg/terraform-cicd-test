@@ -25,12 +25,20 @@ jobs:
         with:
           app-id: ${{ secrets.APP_ID }}
           private-key: ${{ secrets.PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
 
       - name: Checkout
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.ref }}
           token: ${{ steps.app-token.outputs.token }}
+
+      - name: Download terraform assets
+        env:
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: |
+          git clone --depth 1 https://x-access-token:"$GITHUB_TOKEN"@github.com/takapg/terraform-cicd-test-assets.git /tmp/terraform-cicd-test-assets/
+          ls -la /tmp/
 
       - name: Setup
         uses: ./.github/actions/setup
