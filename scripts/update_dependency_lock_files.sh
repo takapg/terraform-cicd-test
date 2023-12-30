@@ -1,5 +1,8 @@
 #!/bin/bash
 
+git diff --exit-code \
+  || (cd accounts && terragrunt run-all init -upgrade)
+
 set -eux
 
 find accounts -name .terraform.lock.hcl |
