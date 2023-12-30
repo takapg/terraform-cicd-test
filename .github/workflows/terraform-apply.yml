@@ -34,11 +34,9 @@ jobs:
           token: ${{ steps.app-token.outputs.token }}
 
       - name: Download terraform assets
-        env:
-          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
-        run: |
-          git clone --depth 1 https://x-access-token:"$GITHUB_TOKEN"@github.com/takapg/terraform-cicd-test-assets.git /tmp/terraform-cicd-test-assets/
-          ls -la /tmp/
+        uses: ./.github/actions/setup
+        with:
+          token: ${{ steps.app-token.outputs.token }}
 
       - name: Setup
         uses: ./.github/actions/setup
