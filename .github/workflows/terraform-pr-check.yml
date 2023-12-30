@@ -34,7 +34,7 @@ jobs:
           token: ${{ steps.app-token.outputs.token }}
 
       - name: Download terraform assets
-        uses: ./.github/actions/setup
+        uses: ./.github/actions/download-terraform-assets
         with:
           token: ${{ steps.app-token.outputs.token }}
 
@@ -102,7 +102,7 @@ jobs:
           token: ${{ steps.app-token.outputs.token }}
 
       - name: Download terraform assets
-        uses: ./.github/actions/setup
+        uses: ./.github/actions/download-terraform-assets
         with:
           token: ${{ steps.app-token.outputs.token }}
 
