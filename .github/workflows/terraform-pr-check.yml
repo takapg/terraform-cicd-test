@@ -36,7 +36,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
         run: |
-          git clone --depth 1 https://github.com/takapg/terraform-cicd-test-assets.git /tmp/terraform-cicd-test-assets/
+          git clone --depth 1 https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/takapg/terraform-cicd-test-assets.git /tmp/terraform-cicd-test-assets/
           ls -la /tmp/
 
       - name: Setup
