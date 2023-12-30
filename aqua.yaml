@@ -9,7 +9,7 @@
 #   - all
 registries:
 - type: standard
-  ref: v4.111.0 # renovate: depName=aquaproj/aqua-registry
+  ref: v4.112.0 # renovate: depName=aquaproj/aqua-registry
 packages:
 - name: tfutils/tfenv@v3.0.0
 - name: gruntwork-io/terragrunt@v0.54.12
