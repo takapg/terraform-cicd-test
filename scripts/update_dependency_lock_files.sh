@@ -2,6 +2,9 @@
 
 set -eux
 
+git diff --exit-code \
+  || (cd accounts && terragrunt run-all init -upgrade)
+
 find accounts -name .terraform.lock.hcl |
 xargs -I{} bash -c 'awk "/^#/" {} > {}_tmp && mv {}_tmp {}'
 
