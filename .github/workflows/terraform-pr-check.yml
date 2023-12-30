@@ -45,7 +45,7 @@ jobs:
             tfenv use min-required
 
             cd ${{ github.workspace }}/accounts
-            terragrunt run-all init
+            terragrunt run-all init -upgrade
 
       - name: Run scripts
         run: |
