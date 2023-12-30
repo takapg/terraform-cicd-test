@@ -57,3 +57,11 @@ jobs:
           cd accounts
           terragrunt run-all apply --terragrunt-non-interactive
 
+      - name: Upload terraform assets
+        env:
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: |
+          find . -not -path '*/.terraform/*' -name 'terraform.tfstate' \
+            | xargs -I{} bash -c 'tfstate_path=/tmp/terraform-cicd-test-assets/tfstate/{} && mkdir -p $(dirname ${tfstate_path}) && cp {} ${tfstate_path}'
+          cd /tmp/terraform-cicd-test-assets/
+          git status
