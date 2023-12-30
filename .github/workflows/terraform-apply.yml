@@ -1,0 +1,62 @@
+name: Terraform apply
+
+on:
+  pull_request:
+    branches:
+      - main
+    types: [closed]
+
+env:
+  TERRAGRUNT_TFPATH: terraform
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  check-code:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Create GitHub App token
+        uses: actions/create-github-app-token@v1
+        id: app-token
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          token: ${{ steps.app-token.outputs.token }}
+
+      - name: Download terraform assets
+        env:
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: |
+          git clone --depth 1 https://x-access-token:"$GITHUB_TOKEN"@github.com/takapg/terraform-cicd-test-assets.git /tmp/terraform-cicd-test-assets/
+          ls -la /tmp/
+
+      - name: Setup
+        uses: ./.github/actions/setup
+
+      - name: Init
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 10
+          max_attempts: 3
+          command: |
+            cd files/terraform
+            tfenv use min-required
+
+            cd ${{ github.workspace }}/accounts
+            terragrunt run-all init
+
+      - name: Apply
+        run: |
+          cd accounts
+          terragrunt run-all apply --terragrunt-non-interactive
+
