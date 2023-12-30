@@ -34,7 +34,7 @@ jobs:
 
       - name: Download terraform assets
         run: |
-          git clone --depth 1 https://github.com/takapg/terraform-cicd-test-assets.git /tmp/
+          git clone --depth 1 https://github.com/takapg/terraform-cicd-test-assets.git /tmp/terraform-cicd-test-assets/
           ls -la /tmp/
 
       - name: Setup
