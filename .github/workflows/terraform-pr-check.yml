@@ -38,7 +38,9 @@ jobs:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
         run: |
           git clone --depth 1 https://x-access-token:"$GITHUB_TOKEN"@github.com/takapg/terraform-cicd-test-assets.git /tmp/terraform-cicd-test-assets/
-          ls -la /tmp/
+          cd /tmp/terraform-cicd-test-assets/tfstate
+          find . -name 'terraform.tfstate' \
+            | xargs -I{} bash -c 'tfstate_path=${{ github.workspace }}/{} && mkdir -p $(dirname ${tfstate_path}) && cp {} ${tfstate_path}'
 
       - name: Setup
         uses: ./.github/actions/setup
@@ -91,6 +93,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Download terraform assets
+        env:
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: |
+          git clone --depth 1 https://x-access-token:"$GITHUB_TOKEN"@github.com/takapg/terraform-cicd-test-assets.git /tmp/terraform-cicd-test-assets/
+          cd /tmp/terraform-cicd-test-assets/tfstate
+          find . -name 'terraform.tfstate' \
+            | xargs -I{} bash -c 'tfstate_path=${{ github.workspace }}/{} && mkdir -p $(dirname ${tfstate_path}) && cp {} ${tfstate_path}'
 
       - name: Setup
         uses: ./.github/actions/setup
