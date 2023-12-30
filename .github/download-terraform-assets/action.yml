@@ -1,0 +1,16 @@
+name: Download terraform assets
+inputs:
+  token:
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Download terraform assets
+      env:
+        GITHUB_TOKEN: ${{ inputs.token }}
+      run: |
+        git clone --depth 1 https://x-access-token:"$GITHUB_TOKEN"@github.com/takapg/terraform-cicd-test-assets.git /tmp/terraform-cicd-test-assets/
+          cd /tmp/terraform-cicd-test-assets/tfstate
+          find . -name 'terraform.tfstate' \
+            | xargs -I{} bash -c 'tfstate_path=${{ github.workspace }}/{} && mkdir -p $(dirname ${tfstate_path}) && cp {} ${tfstate_path}'
+      shell: bash
