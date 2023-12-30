@@ -1,6 +1,6 @@
 #!/bin/bash
 
-git diff --exit-code \
+git diff --exit-code files/terraform/version.tf \
   || (cd accounts && terragrunt run-all init -upgrade)
 
 set -eux
