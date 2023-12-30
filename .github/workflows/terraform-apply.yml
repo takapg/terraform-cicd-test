@@ -65,4 +65,4 @@ jobs:
             | xargs -I{} bash -c 'tfstate_path=/tmp/terraform-cicd-test-assets/tfstate/{} && mkdir -p $(dirname ${tfstate_path}) && cp {} ${tfstate_path}'
           cd /tmp/terraform-cicd-test-assets/
           (git add . && git diff --staged --exit-code) \
-            || (git commit -m 'update' && git push origin main)
+            || (git commit -c user.name='github-actions[bot]' -c user.email='github-actions[bot]@users.noreply.github.com' -m 'update' && git push origin main)
