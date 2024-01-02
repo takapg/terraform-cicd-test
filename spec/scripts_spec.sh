@@ -115,6 +115,14 @@ Describe 'add_required_providers_to_version_file.sh'
       #|      source  = "hashicorp/a"
       #|      version = "1.1.0"
       #|    }
+      #|    b = {
+      #|      source  = "hashicorp/a"
+      #|      version = "1.2.0"
+      #|    }
+      #|    c = {
+      #|      source  = "hashicorp/a"
+      #|      version = "1.3.0"
+      #|    }
       #|  }
       #|}
     )
