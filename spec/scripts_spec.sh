@@ -8,8 +8,13 @@ cleanup_each_tmpdir() {
   rm -rf ${EACH_TMPDIR}
 }
 
+cleanup() {
+  rm -rf "${SHELLSPEC_PROJECT_ROOT}/spec/tmp"
+}
+
 BeforeEach 'setup_each_tmpdir'
 AfterEach 'cleanup_each_tmpdir'
+AfterAll 'cleanup'
 
 export PATH="${SHELLSPEC_PROJECT_ROOT}/scripts:${PATH}"
 
