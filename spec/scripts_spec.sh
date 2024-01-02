@@ -27,14 +27,14 @@ End
 
 Describe 'generate_terraform_version_files.sh'
   It 'should be success'
-    version_tf=$(
+    fixture_version_tf=$(
       %text
       #|terraform {
       #|  required_version = "1.0.0"
       #|}
     )
 
-    dot_terraform_version=$(
+    expected_dot_terraform_version=$(
       %text
       #|1.0.0
     )
@@ -43,12 +43,12 @@ Describe 'generate_terraform_version_files.sh'
     mkdir ./target_02
     mkdir ./not_target_01
 
-    echo "${version_tf}" > ./target_01/version.tf
-    echo "${version_tf}" > ./target_02/version.tf
+    echo "${fixture_version_tf}" > ./target_01/version.tf
+    echo "${fixture_version_tf}" > ./target_02/version.tf
 
     When call generate_terraform_version_files.sh .
-    The contents of file ./target_01/.terraform-version should equal "${dot_terraform_version}"
-    The contents of file ./target_02/.terraform-version should equal "${dot_terraform_version}"
+    The contents of file ./target_01/.terraform-version should equal "${expected_dot_terraform_version}"
+    The contents of file ./target_02/.terraform-version should equal "${expected_dot_terraform_version}"
     The path ./not_target_01/.terraform-version should not be exist
   End
 End
