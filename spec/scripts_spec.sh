@@ -40,5 +40,7 @@ Describe 'generate_terraform_version_files.sh'
 
     When call ./scripts/generate_terraform_version_files.sh ${tmp_root_path}
     The contents of file "${tmp_root_path}/target_01/.terraform-version" should equal "${dot_terraform_version}"
+    The contents of file "${tmp_root_path}/target_02/.terraform-version" should equal "${dot_terraform_version}"
+    The file "${tmp_root_path}/not_target_01/.terraform-version" should not exist
   End
 End
