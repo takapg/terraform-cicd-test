@@ -1,9 +1,12 @@
 setup_each_tmpdir() {
   EACH_TMPDIR="${SHELLSPEC_WORKDIR}/${SHELLSPEC_EXAMPLE_ID}"
   mkdir -p ${EACH_TMPDIR}
+  cd ${EACH_TMPDIR}
 }
 
 BeforeEach 'setup_each_tmpdir'
+
+PATH="$PATH:./scripts"
 
 Describe 'aaa'
   It 'should be success'
@@ -26,16 +29,16 @@ Describe 'generate_terraform_version_files.sh'
       #|1.0.0
     )
 
-    mkdir -p "${EACH_TMPDIR}/target_01"
-    mkdir -p "${EACH_TMPDIR}/target_02"
-    mkdir -p "${EACH_TMPDIR}/not_target_01"
+    mkdir ./target_01
+    mkdir ./target_02
+    mkdir ./not_target_01
 
-    echo "${version_tf}" > "${EACH_TMPDIR}/target_01/version.tf"
-    echo "${version_tf}" > "${EACH_TMPDIR}/target_02/version.tf"
+    echo "${version_tf}" > ./target_01/version.tf
+    echo "${version_tf}" > ./target_02/version.tf
 
-    When call ./scripts/generate_terraform_version_files.sh ${EACH_TMPDIR}
-    The contents of file "${EACH_TMPDIR}/target_01/.terraform-version" should equal "${dot_terraform_version}"
-    The contents of file "${EACH_TMPDIR}/target_02/.terraform-version" should equal "${dot_terraform_version}"
-    The path "${EACH_TMPDIR}/not_target_01/.terraform-version" should not be exist
+    When call generate_terraform_version_files.sh ${EACH_TMPDIR}
+    The contents of file ./target_01/.terraform-version should equal "${dot_terraform_version}"
+    The contents of file ./target_02/.terraform-version should equal "${dot_terraform_version}"
+    The path ./not_target_01/.terraform-version should not be exist
   End
 End
