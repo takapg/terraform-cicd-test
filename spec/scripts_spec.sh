@@ -24,7 +24,21 @@ Describe 'generate_terraform_version_files.sh'
       #|  required_version = "1.0.0"
       #|}
     )
-    When call echo ${version_tf}
-    The output should equal 'aaa'
+
+    dot_terraform_version=$(
+      %text
+      #|1.0.0
+    )
+
+    tmp_root_path='./spec/tmp/generate_terraform_version_files'
+    mkdir -p "${tmp_root_path}/target_01"
+    mkdir -p "${tmp_root_path}/target_02"
+    mkdir -p "${tmp_root_path}/not_target_01"
+
+    echo "${version_tf}" > "${tmp_root_path}/target_01/version.tf"
+    echo "${version_tf}" > "${tmp_root_path}/target_02/version.tf"
+
+    When call .scripts/generate_terraform_version_files.sh ${tmp_root_path}
+    The contents of file "${tmp_root_path}/target_01/.terraform-version" should equal "${dot_terraform_version}"
   End
 End
