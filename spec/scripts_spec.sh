@@ -6,7 +6,7 @@ setup_each_tmpdir() {
 
 BeforeEach 'setup_each_tmpdir'
 
-PATH="$PATH:./scripts"
+export PATH="$PATH:./scripts"
 
 Describe 'aaa'
   It 'should be success'
