@@ -1,5 +1,5 @@
 setup_each_tmpdir() {
-  EACH_TMPDIR="./spec/tmp/${SHELLSPEC_SPEC_NO}/${SHELLSPEC_EXAMPLE_ID}"
+  export EACH_TMPDIR="${SHELLSPEC_PROJECT_ROOT}/spec/tmp/${SHELLSPEC_SPEC_NO}/${SHELLSPEC_EXAMPLE_ID}"
   mkdir -p ${EACH_TMPDIR}
   cd ${EACH_TMPDIR}
 }
