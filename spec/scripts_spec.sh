@@ -52,3 +52,49 @@ Describe 'generate_dot_terraform_version_files.sh'
     The path ./not_target_01/.terraform-version should not be exist
   End
 End
+
+Describe 'add_required_providers_to_version_file.sh'
+  It 'should be success'
+    mkdir ./files
+
+    echo $(
+      %text
+      #|terraform {
+      #|  required_version = "1.0.0"
+      #|}
+    ) > ./files/version.tf
+
+    mkdir -p ./top/a
+
+    echo $(
+      %text
+      #|# This file is maintained automatically by "terraform init".
+      #|# Manual edits may be lost in future updates.
+      #|
+      #|provider "registry.terraform.io/hashicorp/a" {
+      #|  version     = "1.1.0"
+      #|  constraints = "1.1.0"
+      #|  hashes = [
+      #|    "h1:dummy",
+      #|    "zh:dummy",
+      #|  ]
+      #|}
+    ) > ./top/a/.terraform.lock.hcl
+
+    expected_template_version_tf_contents=$(
+      %text
+      #|terraform {
+      #|  required_version = "1.0.0"
+      #|  required_providers {
+      #|    a = {
+      #|      source  = "hashicorp/a"
+      #|      version = "1.1.0"
+      #|    }
+      #|  }
+      #|}
+
+      When call add_required_providers_to_version_file.sh ./top ./files/version.tf
+      The contents of file ./files/version.tf should equal "${expected_template_version_tf_contents}"
+    )
+  End
+End
