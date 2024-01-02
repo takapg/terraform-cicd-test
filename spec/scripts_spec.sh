@@ -57,12 +57,12 @@ Describe 'add_required_providers_to_version_file.sh'
   It 'should be success'
     mkdir ./files
 
-    echo $(
+    echo "$(
       %text
       #|terraform {
       #|  required_version = "1.0.0"
       #|}
-    ) > ./files/version.tf
+    )" > ./files/version.tf
 
     mkdir -p ./top/a
 
