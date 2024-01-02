@@ -2,7 +2,7 @@
 
 set -eu
 
-dir_path=$1
+root_modules_top_dir=$1
 
 generate_terraform_version_file() {
   version_file_path=$1
@@ -11,5 +11,5 @@ generate_terraform_version_file() {
 }
 export -f generate_terraform_version_file
 
-find ${dir_path} -name version.tf \
+find ${root_modules_top_dir} -name version.tf \
   | xargs -I{} bash -c 'generate_terraform_version_file {}'
