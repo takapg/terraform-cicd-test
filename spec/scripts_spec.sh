@@ -1,12 +1,15 @@
 setup_each_tmpdir() {
-  EACH_TMPDIR="${SHELLSPEC_WORKDIR}/${SHELLSPEC_EXAMPLE_ID}"
+  EACH_TMPDIR="./spec/tmp/${SHELLSPEC_SPEC_NO}/${SHELLSPEC_EXAMPLE_ID}"
   mkdir -p ${EACH_TMPDIR}
   cd ${EACH_TMPDIR}
 }
 
-BeforeEach 'setup_each_tmpdir'
+cleanup_each_tmpdir() {
+  rm -rf ${EACH_TMPDIR}
+}
 
-export PATH="$SHELLSPEC_PROJECT_ROOT/scripts:$PATH"
+BeforeEach 'setup_each_tmpdir'
+AfterEach 'cleanup_each_tmpdir'
 
 Describe 'aaa'
   It 'should be success'
@@ -36,7 +39,7 @@ Describe 'generate_terraform_version_files.sh'
     echo "${version_tf}" > ./target_01/version.tf
     echo "${version_tf}" > ./target_02/version.tf
 
-    When call generate_terraform_version_files.sh ${EACH_TMPDIR}
+    When call ./scripts/generate_terraform_version_files.sh .
     The contents of file ./target_01/.terraform-version should equal "${dot_terraform_version}"
     The contents of file ./target_02/.terraform-version should equal "${dot_terraform_version}"
     The path ./not_target_01/.terraform-version should not be exist
