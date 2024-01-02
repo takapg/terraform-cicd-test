@@ -14,27 +14,27 @@ REQUIRED_PROVIDERS=$(
   find ${root_modules_top_dir} -name .terraform.lock.hcl \
     | xargs -I{} hcl2json {} \
     | jq -c '
-        .provider |
-        to_entries |
-        .[] |
-        {
-          name: (.key | capture("^.+/(?<name>.+)$") | .name),
-          source: (.key | capture("^registry\\.terraform\\.io/(?<source>.+)$") | .source),
-          version: .value[0].version
-        }
+        .provider
+          | to_entries
+          | .[]
+          | {
+              name: (.key | capture("^.+/(?<name>.+)$") | .name),
+              source: (.key | capture("^registry\\.terraform\\.io/(?<source>.+)$") | .source),
+              version: .value[0].version
+            }
       ' \
     | jq -s -r '
-        group_by(.source) |
-        .[] |
-        sort_by(.version | split(".") | map(tonumber)) |
-        .[-1] |
-        [
-          .name + " = {",
-          "source = \"" + .source + "\"",
-          "version = \"" + .version + "\"",
-          "}"
-        ] |
-        join("\n")
+        group_by(.source)
+          | .[]
+          | sort_by(.version | split(".") | map(tonumber))
+          | .[-1]
+          | [
+              .name + " = {",
+              "source = \"" + .source + "\"",
+              "version = \"" + .version + "\"",
+              "}"
+            ]
+          | join("\n")
       '
 )
 
