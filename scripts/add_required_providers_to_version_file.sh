@@ -1,14 +1,17 @@
 #!/bin/bash
 
-set -eux
+set -eu
+
+root_modules_top_dir=$1
+template_version_tf_path=$2
 
 REQUIRED_VERSION=$(
-  cat files/terraform/version.tf |
+  cat ${template_version_tf_path} |
   hcledit attribute get terraform.required_version
 )
 
 REQUIRED_PROVIDERS=$(
-  find accounts -name .terraform.lock.hcl |
+  find ${root_modules_top_dir} -name .terraform.lock.hcl |
   xargs -I{} hcl2json {} |
   jq -c '
     .provider |
@@ -35,7 +38,7 @@ REQUIRED_PROVIDERS=$(
   '
 )
 
-cat << EOF > files/terraform/version.tf
+cat << EOF > ${template_version_tf_path}
 terraform {
   required_version = ${REQUIRED_VERSION}
   required_providers {
@@ -44,4 +47,4 @@ terraform {
 }
 EOF
 
-hcledit fmt -u -f files/terraform/version.tf
+hcledit fmt -u -f ${template_version_tf_path}
