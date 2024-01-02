@@ -5,12 +5,12 @@ set -eu
 root_modules_top_dir=$1
 template_version_tf_path=$2
 
-REQUIRED_VERSION=$(
+required_version=$(
   cat ${template_version_tf_path} \
     | hcledit attribute get terraform.required_version
 )
 
-REQUIRED_PROVIDERS=$(
+required_providers=$(
   find ${root_modules_top_dir} -name .terraform.lock.hcl \
     | xargs -I{} hcl2json {} \
     | jq -c '
@@ -40,9 +40,9 @@ REQUIRED_PROVIDERS=$(
 
 cat << EOF > ${template_version_tf_path}
 terraform {
-  required_version = ${REQUIRED_VERSION}
+  required_version = ${required_version}
   required_providers {
-    ${REQUIRED_PROVIDERS}
+    ${required_providers}
   }
 }
 EOF
