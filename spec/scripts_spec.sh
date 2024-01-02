@@ -80,6 +80,7 @@ Describe 'add_required_providers_to_version_file.sh'
       #|  ]
       #|}
     ) > ./top/a/.terraform.lock.hcl
+    cat ./top/a/.terraform.lock.hcl
 
     expected_template_version_tf_contents=$(
       %text
