@@ -9,8 +9,6 @@ cleanup() {
 BeforeAll 'setup'
 AfterAll 'cleanup'
 
-Set 'xtrace:off'
-
 Describe 'aaa'
   It 'should be success'
     When call echo 'aaa'
