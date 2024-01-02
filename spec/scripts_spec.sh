@@ -66,7 +66,7 @@ Describe 'add_required_providers_to_version_file.sh'
 
     mkdir -p ./top/a
 
-    echo $(
+    echo "$(
       %text
       #|# This file is maintained automatically by "terraform init".
       #|# Manual edits may be lost in future updates.
@@ -79,7 +79,7 @@ Describe 'add_required_providers_to_version_file.sh'
       #|    "zh:dummy",
       #|  ]
       #|}
-    ) > ./top/a/.terraform.lock.hcl
+    )" > ./top/a/.terraform.lock.hcl
     cat ./top/a/.terraform.lock.hcl
 
     expected_template_version_tf_contents=$(
