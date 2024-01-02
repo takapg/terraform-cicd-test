@@ -6,7 +6,7 @@ setup_each_tmpdir() {
 
 BeforeEach 'setup_each_tmpdir'
 
-export PATH="$PATH:./scripts"
+export PATH="$SHELLSPEC_PROJECT_ROOT/scripts:$PATH"
 
 Describe 'aaa'
   It 'should be success'
@@ -36,7 +36,7 @@ Describe 'generate_terraform_version_files.sh'
     echo "${version_tf}" > ./target_01/version.tf
     echo "${version_tf}" > ./target_02/version.tf
 
-    When call ./generate_terraform_version_files.sh ${EACH_TMPDIR}
+    When call generate_terraform_version_files.sh ${EACH_TMPDIR}
     The contents of file ./target_01/.terraform-version should equal "${dot_terraform_version}"
     The contents of file ./target_02/.terraform-version should equal "${dot_terraform_version}"
     The path ./not_target_01/.terraform-version should not be exist
