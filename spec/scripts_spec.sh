@@ -46,14 +46,14 @@ Describe 'generate_dot_terraform_version_files.sh'
       #|1.0.0
     )
 
-    When call generate_dot_terraform_version_files.sh .
+    When run script generate_dot_terraform_version_files.sh .
     The contents of file ./target_01/.terraform-version should equal "${expected_dot_terraform_version_contents}"
     The contents of file ./target_02/.terraform-version should equal "${expected_dot_terraform_version_contents}"
     The path ./not_target_01/.terraform-version should not be exist
   End
 End
 
-Describe 'add_required_providers_to_version_file.sh'
+Describe 'add_required_providers_to_template_version_tf_file.sh'
   It 'should be success'
     mkdir ./files
 
@@ -127,7 +127,7 @@ Describe 'add_required_providers_to_version_file.sh'
       #|}
     )
 
-    When run script add_required_providers_to_version_file.sh ./top ./files/version.tf
+    When run script add_required_providers_to_template_version_tf_file.sh ./top ./files/version.tf
     The contents of file ./files/version.tf should equal "${expected_template_version_tf_contents}"
   End
 End
