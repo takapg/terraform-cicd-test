@@ -11,6 +11,8 @@ cleanup_each_tmpdir() {
 BeforeEach 'setup_each_tmpdir'
 AfterEach 'cleanup_each_tmpdir'
 
+export PATH="${SHELLSPEC_PROJECT_ROOT}/scripts:${PATH}"
+
 Describe 'aaa'
   It 'should be success'
     When call echo 'aaa'
@@ -39,7 +41,7 @@ Describe 'generate_terraform_version_files.sh'
     echo "${version_tf}" > ./target_01/version.tf
     echo "${version_tf}" > ./target_02/version.tf
 
-    When call ./scripts/generate_terraform_version_files.sh .
+    When call generate_terraform_version_files.sh .
     The contents of file ./target_01/.terraform-version should equal "${dot_terraform_version}"
     The contents of file ./target_02/.terraform-version should equal "${dot_terraform_version}"
     The path ./not_target_01/.terraform-version should not be exist
