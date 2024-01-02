@@ -94,7 +94,7 @@ Describe 'add_required_providers_to_version_file.sh'
       #|}
     )
 
-    When call add_required_providers_to_version_file.sh ./top ./files/version.tf
+    When run script add_required_providers_to_version_file.sh ./top ./files/version.tf
     The contents of file ./files/version.tf should equal "${expected_template_version_tf_contents}"
   End
 End
