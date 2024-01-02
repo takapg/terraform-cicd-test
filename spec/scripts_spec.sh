@@ -34,17 +34,17 @@ Describe 'generate_terraform_version_files.sh'
       #|}
     )
 
-    expected_dot_terraform_version=$(
-      %text
-      #|1.0.0
-    )
-
     mkdir ./target_01
     mkdir ./target_02
     mkdir ./not_target_01
 
     echo "${fixture_version_tf}" > ./target_01/version.tf
     echo "${fixture_version_tf}" > ./target_02/version.tf
+
+    expected_dot_terraform_version=$(
+      %text
+      #|1.0.0
+    )
 
     When call generate_terraform_version_files.sh .
     The contents of file ./target_01/.terraform-version should equal "${expected_dot_terraform_version}"
