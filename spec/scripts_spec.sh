@@ -12,7 +12,7 @@ AfterAll 'cleanup'
 Describe 'aaa'
   It 'should be success'
     pwd
-    ls -la
+    echo ${SHELLSPEC_WORKDIR}
     When call echo 'aaa'
     The output should equal 'aaa'
   End
@@ -41,7 +41,7 @@ Describe 'generate_terraform_version_files.sh'
     echo "${version_tf}" > "${tmp_root_path}/target_02/version.tf"
 
     pwd
-    ls -la
+    echo ${SHELLSPEC_WORKDIR}
     When call ./scripts/generate_terraform_version_files.sh ${tmp_root_path}
     The contents of file "${tmp_root_path}/target_01/.terraform-version" should equal "${dot_terraform_version}"
     The contents of file "${tmp_root_path}/target_02/.terraform-version" should equal "${dot_terraform_version}"
