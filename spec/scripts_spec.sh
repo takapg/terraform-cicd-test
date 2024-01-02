@@ -1,19 +1,13 @@
-setup() {
-  mkdir -p ./spec/tmp
+setup_each_tmpdir() {
+  EACH_TMPDIR="${SHELLSPEC_WORKDIR}/${SHELLSPEC_EXAMPLE_ID}"
+  mkdir -p ${EACH_TMPDIR}
 }
 
-cleanup() {
-  rm -rf ./spec/tmp
-}
-
-BeforeAll 'setup'
-AfterAll 'cleanup'
+BeforeEach 'setup_each_tmpdir'
 
 Describe 'aaa'
   It 'should be success'
-    pwd
-    echo ${SHELLSPEC_WORKDIR}
-    printenv | grep SHELLSPEC_ | grep '/tmp'
+    echo ${EACH_TMPDIR}
     When call echo 'aaa'
     The output should equal 'aaa'
   End
@@ -41,9 +35,7 @@ Describe 'generate_terraform_version_files.sh'
     echo "${version_tf}" > "${tmp_root_path}/target_01/version.tf"
     echo "${version_tf}" > "${tmp_root_path}/target_02/version.tf"
 
-    pwd
-    echo ${SHELLSPEC_WORKDIR}
-    printenv | grep SHELLSPEC_ | grep '/tmp'
+    echo ${EACH_TMPDIR}
     When call ./scripts/generate_terraform_version_files.sh ${tmp_root_path}
     The contents of file "${tmp_root_path}/target_01/.terraform-version" should equal "${dot_terraform_version}"
     The contents of file "${tmp_root_path}/target_02/.terraform-version" should equal "${dot_terraform_version}"
