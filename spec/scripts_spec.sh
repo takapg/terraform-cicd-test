@@ -25,7 +25,7 @@ Describe 'aaa'
   End
 End
 
-Describe 'generate_terraform_version_files.sh'
+Describe 'generate_dot_terraform_version_files.sh'
   It 'should be success'
     fixture_version_tf_contents=$(
       %text
@@ -46,7 +46,7 @@ Describe 'generate_terraform_version_files.sh'
       #|1.0.0
     )
 
-    When call generate_terraform_version_files.sh .
+    When call generate_dot_terraform_version_files.sh .
     The contents of file ./target_01/.terraform-version should equal "${expected_dot_terraform_version_contents}"
     The contents of file ./target_02/.terraform-version should equal "${expected_dot_terraform_version_contents}"
     The path ./not_target_01/.terraform-version should not be exist
