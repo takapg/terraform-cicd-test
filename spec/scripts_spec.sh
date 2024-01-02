@@ -65,6 +65,7 @@ Describe 'add_required_providers_to_version_file.sh'
     )" > ./files/version.tf
 
     mkdir -p ./top/a
+    mkdir -p ./top/c_and_b
 
     echo "$(
       %text
@@ -80,7 +81,30 @@ Describe 'add_required_providers_to_version_file.sh'
       #|  ]
       #|}
     )" > ./top/a/.terraform.lock.hcl
-    cat ./top/a/.terraform.lock.hcl
+
+    echo "$(
+      %text
+      #|# This file is maintained automatically by "terraform init".
+      #|# Manual edits may be lost in future updates.
+      #|
+      #|provider "registry.terraform.io/hashicorp/c" {
+      #|  version     = "1.3.0"
+      #|  constraints = "1.3.0"
+      #|  hashes = [
+      #|    "h1:dummy",
+      #|    "zh:dummy",
+      #|  ]
+      #|}
+      #|
+      #|provider "registry.terraform.io/hashicorp/b" {
+      #|  version     = "1.2.0"
+      #|  constraints = "1.2.0"
+      #|  hashes = [
+      #|    "h1:dummy",
+      #|    "zh:dummy",
+      #|  ]
+      #|}
+    )" > ./top/c_and_b/.terraform.lock.hcl
 
     expected_template_version_tf_contents=$(
       %text
