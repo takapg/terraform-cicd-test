@@ -34,22 +34,22 @@ Describe 'generate_dot_terraform_version_files.sh'
       #|}
     )
 
-    mkdir ./target_01
-    mkdir ./target_02
-    mkdir ./not_target_01
+    mkdir -p ./top/target_01
+    mkdir -p ./top/target_02
+    mkdir -p ./top/not_target_01
 
-    echo "${fixture_version_tf_contents}" > ./target_01/version.tf
-    echo "${fixture_version_tf_contents}" > ./target_02/version.tf
+    echo "${fixture_version_tf_contents}" > ./top/target_01/version.tf
+    echo "${fixture_version_tf_contents}" > ./top/target_02/version.tf
 
     expected_dot_terraform_version_contents=$(
       %text
       #|1.0.0
     )
 
-    When run script generate_dot_terraform_version_files.sh .
-    The contents of file ./target_01/.terraform-version should equal "${expected_dot_terraform_version_contents}"
-    The contents of file ./target_02/.terraform-version should equal "${expected_dot_terraform_version_contents}"
-    The path ./not_target_01/.terraform-version should not be exist
+    When run script generate_dot_terraform_version_files.sh ./top
+    The contents of file ./top/target_01/.terraform-version should equal "${expected_dot_terraform_version_contents}"
+    The contents of file ./top/target_02/.terraform-version should equal "${expected_dot_terraform_version_contents}"
+    The path ./top/not_target_01/.terraform-version should not be exist
   End
 End
 
