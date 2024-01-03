@@ -16,6 +16,7 @@ permissions:
 
 jobs:
   check-code:
+    if: github.event.pull_request.draft == false
     runs-on: ubuntu-latest
 
     steps:
@@ -41,6 +42,10 @@ jobs:
       - name: Setup
         uses: ./.github/actions/setup
 
+      - name: Test scripts
+        run: |
+          shellspec
+
       - name: Init
         uses: nick-fields/retry@v2
         with:
@@ -53,12 +58,12 @@ jobs:
             cd ${{ github.workspace }}/accounts
             terragrunt run-all init -upgrade
 
-      - name: Run scripts
+      - name: Setup terraform version settings
         run: |
           chmod +x scripts/*
-          ./scripts/generate_terraform_version_files.sh
-          ./scripts/add_required_providers_to_version_file.sh
-          ./scripts/update_dependency_lock_files.sh
+          ./scripts/setup_terraform_version_settings.sh \
+            ./accounts \
+            ./files/terraform/version.tf
 
       - name: Run pre-commit
         uses: pre-commit/action@v3.0.0

@@ -1,14 +1,13 @@
 #!/bin/bash
 
-git diff --exit-code files/terraform/version.tf \
-  || (cd accounts && terragrunt run-all init -upgrade)
+set -eu
 
-set -eux
+root_modules_top_dir=$1
 
-find accounts -name .terraform.lock.hcl |
+find ${root_modules_top_dir} -name .terraform.lock.hcl |
 xargs -I{} bash -c 'awk "/^#/" {} > {}_tmp && mv {}_tmp {}'
 
 tfupdate lock \
   --platform=linux_amd64 --platform=linux_arm64 --platform=darwin_amd64 --platform=darwin_arm64 \
   --recursive \
-  accounts
+  ${root_modules_top_dir}
