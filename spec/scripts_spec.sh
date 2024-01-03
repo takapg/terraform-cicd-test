@@ -158,6 +158,21 @@ Describe 'update_dependency_lock_files.sh'
     echo "${fixture_version_tf_contents}" > ./top/target_01/version.tf
     echo "${fixture_version_tf_contents}" > ./top/target_02/version.tf
 
+    echo "$(
+      %text
+      #|# This file is maintained automatically by "terraform init".
+      #|# Manual edits may be lost in future updates.
+      #|
+      #|provider "registry.terraform.io/hashicorp/dummy" {
+      #|  version     = "1.1.0"
+      #|  constraints = "1.1.0"
+      #|  hashes = [
+      #|    "h1:dummy",
+      #|    "zh:dummy",
+      #|  ]
+      #|}
+    )" > ./top/target_01/.terraform.lock.hcl
+
     expected_dot_terraform_lock_hcl_contents=$(
       %text
       #|# This file is maintained automatically by "terraform init".
