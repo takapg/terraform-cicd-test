@@ -42,6 +42,10 @@ jobs:
       - name: Setup
         uses: ./.github/actions/setup
 
+      - name: Test scripts
+        run: |
+          shellspec
+
       - name: Init
         uses: nick-fields/retry@v2
         with:
