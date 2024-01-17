@@ -3,7 +3,7 @@ runs:
   using: "composite"
   steps:
     - name: Cache aqua tools
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: ~/.local/share/aquaproj-aqua
         key: ${{ runner.os }}-aqua-${{ hashFiles('aqua.yaml') }}
@@ -23,7 +23,7 @@ runs:
       shell: bash
 
     - name: Cache Terraform Plugins
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: ~/.terraform.d/plugin-cache
         key: ${{ runner.os }}-terraform-${{ hashFiles('**/.terraform.lock.hcl') }}
