@@ -114,6 +114,15 @@ jobs:
       - name: Setup
         uses: ./.github/actions/setup
 
+      - name: Init
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 10
+          max_attempts: 3
+          command: |
+            cd accounts
+            terragrunt run-all init
+
       - name: Plan and comment
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
