@@ -13,7 +13,7 @@ runs:
     - name: Install aqua
       uses: aquaproj/aqua-installer@v2.3.0
       with:
-        aqua_version: v2.22.0
+        aqua_version: v2.23.0
         aqua_opts: ""
 
     - name: Config Terraform plugin cache
