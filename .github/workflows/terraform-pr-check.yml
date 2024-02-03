@@ -52,10 +52,7 @@ jobs:
           timeout_minutes: 10
           max_attempts: 3
           command: |
-            cd files/terraform
-            tfenv use min-required
-
-            cd ${{ github.workspace }}/accounts
+            cd accounts
             terragrunt run-all init -upgrade
 
       - name: Setup terraform version settings
