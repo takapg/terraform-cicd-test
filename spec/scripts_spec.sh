@@ -25,34 +25,6 @@ Describe 'aaa'
   End
 End
 
-Describe 'generate_dot_terraform_version_files.sh'
-  It 'should be success'
-    fixture_version_tf_contents=$(
-      %text
-      #|terraform {
-      #|  required_version = "1.0.0"
-      #|}
-    )
-
-    mkdir -p ./top/target_01
-    mkdir -p ./top/target_02
-    mkdir -p ./top/not_target_01
-
-    echo "${fixture_version_tf_contents}" > ./top/target_01/version.tf
-    echo "${fixture_version_tf_contents}" > ./top/target_02/version.tf
-
-    expected_dot_terraform_version_contents=$(
-      %text
-      #|1.0.0
-    )
-
-    When run script generate_dot_terraform_version_files.sh ./top
-    The contents of file ./top/target_01/.terraform-version should equal "${expected_dot_terraform_version_contents}"
-    The contents of file ./top/target_02/.terraform-version should equal "${expected_dot_terraform_version_contents}"
-    The path ./top/not_target_01/.terraform-version should not be exist
-  End
-End
-
 Describe 'add_required_providers_to_template_version_tf_file.sh'
   It 'should be success'
     mkdir ./files
