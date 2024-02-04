@@ -11,7 +11,7 @@ registries:
 - type: standard
   ref: v4.128.0 # renovate: depName=aquaproj/aqua-registry
 packages:
-- name: tofuutils/tenv@v1.0.8
+- name: tofuutils/tenv@v1.0.9
 - name: gruntwork-io/terragrunt@v0.55.0
 - name: minamijoyo/hcledit@v0.2.10
 - name: minamijoyo/tfupdate@v0.8.1
