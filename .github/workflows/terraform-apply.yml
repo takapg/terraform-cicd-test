@@ -8,6 +8,7 @@ on:
 
 env:
   TERRAGRUNT_TFPATH: terraform
+  TENV_QUIET: t
 
 permissions:
   contents: write
