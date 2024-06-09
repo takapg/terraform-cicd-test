@@ -10,6 +10,7 @@ on:
 env:
   TERRAGRUNT_TFPATH: terraform
   TENV_QUIET: t
+  TENV_AUTO_INSTALL: true
 
 permissions:
   contents: write
