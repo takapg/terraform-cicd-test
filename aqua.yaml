@@ -17,5 +17,5 @@ packages:
 - name: minamijoyo/tfupdate@v0.8.2
 - name: tmccombs/hcl2json@v0.6.3
 - name: suzuki-shunsuke/tfcmt@v4.11.0
-- name: suzuki-shunsuke/github-comment@v6.0.4
+- name: suzuki-shunsuke/github-comment@v6.1.0
 - name: shellspec/shellspec@0.28.1
