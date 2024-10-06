@@ -12,7 +12,7 @@ registries:
   ref: v4.229.0 # renovate: depName=aquaproj/aqua-registry
 packages:
 - name: tofuutils/tenv@v3.2.4
-- name: gruntwork-io/terragrunt@v0.67.1
+- name: gruntwork-io/terragrunt@v0.67.16
 - name: minamijoyo/hcledit@v0.2.15
 - name: minamijoyo/tfupdate@v0.8.5
 - name: tmccombs/hcl2json@v0.6.4
