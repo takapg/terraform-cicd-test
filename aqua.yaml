@@ -15,7 +15,7 @@ packages:
 - name: gruntwork-io/terragrunt@v0.67.16
 - name: minamijoyo/hcledit@v0.2.15
 - name: minamijoyo/tfupdate@v0.8.5
-- name: tmccombs/hcl2json@v0.6.4
+- name: tmccombs/hcl2json@v0.6.9
 - name: suzuki-shunsuke/tfcmt@v4.14.0
 - name: suzuki-shunsuke/github-comment@v6.2.1
 - name: shellspec/shellspec@0.28.1
